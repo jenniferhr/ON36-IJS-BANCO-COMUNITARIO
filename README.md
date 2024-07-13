@@ -20,4 +20,4 @@ O projeto integrador desenvolvido individualmente durante o bootcamp **Imersão 
 
 ## Diagrama de classes UML
 Protótipo inicial do diagrama de classes do sistema:
-<img src="imagens/diagrama de classes semana 1.png">
+<img src="imagens/diagrama de classes.png">
