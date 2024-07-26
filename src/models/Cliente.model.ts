@@ -1,7 +1,5 @@
 import { ICliente } from "../interfaces/ICliente";
 import { Conta } from "./Conta.model";
-import { ContaCorrente } from "./ContaCorrente.model";
-import { ContaPoupanca } from "./ContaPoupanca.model";
 
 export class Cliente implements ICliente {
   id: number;

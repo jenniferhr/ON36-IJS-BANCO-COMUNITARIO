@@ -1,5 +1,4 @@
 import { Cliente } from "./models/Cliente.model";
-import { Conta } from "./models/Conta.model";
 import { ContaCorrente } from "./models/ContaCorrente.model";
 import { ContaPoupanca } from "./models/ContaPoupanca.model";
 
