@@ -1,3 +1,5 @@
+import { Conta } from "../models/Conta.model";
+
 export interface IConta {
   numeroDaConta: number;
   idCliente: number;
@@ -5,6 +7,5 @@ export interface IConta {
 
   depositar(valor: number): void;
   sacar(valor: number): void;
-  transferir(valor: number, numeroDaConta: number): void;
-  gerarExtrato(): void;
+  transferir(valor: number, contaDestino: Conta): void;
 }

@@ -1,3 +1,5 @@
+import { Conta } from "../models/Conta.model";
+
 export interface ICliente {
   id: number;
   nomeCompleto: string;
@@ -6,6 +8,7 @@ export interface ICliente {
   email: string;
   dataDeNascimento: string;
   cpf: string;
+  contas: Conta[];
 
-  abrirConta(): void;
+  adicionarConta(conta: Conta): void;
 }

@@ -1,4 +1,7 @@
 import { ICliente } from "../interfaces/ICliente";
+import { Conta } from "./Conta.model";
+import { ContaCorrente } from "./ContaCorrente.model";
+import { ContaPoupanca } from "./ContaPoupanca.model";
 
 export class Cliente implements ICliente {
   id: number;
@@ -8,6 +11,7 @@ export class Cliente implements ICliente {
   email: string;
   dataDeNascimento: string;
   cpf: string;
+  contas: Conta[]
 
   constructor(id: number, nomeCompleto: string, endereco: string, telefone: string, email: string, dataDeNascimento: string, cpf: string) {
     this.id = id;
@@ -17,9 +21,11 @@ export class Cliente implements ICliente {
     this.email = email;
     this.dataDeNascimento = dataDeNascimento;
     this.cpf = cpf;
+    this.contas = [];
   }
 
-  abrirConta(): void {
-
+  adicionarConta(conta: Conta) {
+    this.contas.push(conta);
   }
+
 }

@@ -37,22 +37,23 @@ export abstract class Conta implements IConta {
   idCliente: number;
   saldo: number;
 
-  constructor(numeroDaConta: number, idCliente: number, saldo: number) {
+  constructor(numeroDaConta: number, idCliente: number) {
     this.numeroDaConta = numeroDaConta;
     this.idCliente = idCliente;
-    this.saldo = saldo;
+    this.saldo = 0;
   }
 
   depositar(valor: number): void {
-
+    this.saldo += valor;
   }
+
   sacar(valor: number): void {
+    if (this.saldo >= valor) {
+      this.saldo -= valor;
+    } else {
+      console.log(`Saldo insuficiente para a transação. Saldo atual: ${this.saldo}`)
+    }
+  }
 
-  }
-  transferir(valor: number, numeroDaConta: number): void {
-
-  }
-  gerarExtrato(): void {
-    
-  }
+  abstract transferir(valor: number, contaDestino: Conta): void;
 }
