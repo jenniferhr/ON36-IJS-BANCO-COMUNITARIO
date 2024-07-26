@@ -1,10 +1,11 @@
+import { Cliente } from "./Cliente.model";
 import { Conta } from "./Conta.model";
 
 export class ContaPoupanca extends Conta {
   taxaJuros: number;
 
-  constructor(numeroDaConta: number, idCliente: number, taxaJuros: number) {
-    super(numeroDaConta, idCliente)
+  constructor(numeroDaConta: number, cliente: Cliente, taxaJuros: number) {
+    super(numeroDaConta, cliente)
     this.taxaJuros = taxaJuros;
   }
 

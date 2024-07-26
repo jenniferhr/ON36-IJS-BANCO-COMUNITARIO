@@ -1,4 +1,5 @@
 import { IConta } from "../interfaces/IConta";
+import { Cliente } from "./Cliente.model";
 
 /*
 Interface IConta
@@ -34,12 +35,12 @@ abrirConta()
 */
 export abstract class Conta implements IConta {
   numeroDaConta: number;
-  idCliente: number;
+  cliente: Cliente;
   saldo: number;
 
-  constructor(numeroDaConta: number, idCliente: number) {
+  constructor(numeroDaConta: number, cliente: Cliente) {
     this.numeroDaConta = numeroDaConta;
-    this.idCliente = idCliente;
+    this.cliente = cliente;
     this.saldo = 0;
   }
 

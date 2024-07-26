@@ -1,10 +1,11 @@
+import { Cliente } from "./Cliente.model";
 import { Conta } from "./Conta.model";
 
 export class ContaCorrente extends Conta {
   limiteChequeEspecial: number;
 
-  constructor(numeroDaConta: number, idCliente: number, limiteChequeEspecial: number) {
-    super(numeroDaConta, idCliente)
+  constructor(numeroDaConta: number, cliente: Cliente, limiteChequeEspecial: number) {
+    super(numeroDaConta, cliente)
     this.limiteChequeEspecial = limiteChequeEspecial;
   }
 

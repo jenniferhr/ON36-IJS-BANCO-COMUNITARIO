@@ -1,8 +1,9 @@
+import { Cliente } from "src/models/Cliente.model";
 import { Conta } from "../models/Conta.model";
 
 export interface IConta {
   numeroDaConta: number;
-  idCliente: number;
+  cliente: Cliente;
   saldo: number;
 
   depositar(valor: number): void;
