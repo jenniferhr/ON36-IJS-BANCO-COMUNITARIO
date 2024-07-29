@@ -1,6 +1,6 @@
-import { ICliente } from "../interfaces/ICliente";
-import { Conta } from "./Conta.model";
-import { Gerente } from "./Gerente.model";
+import { ICliente } from '../interfaces/ICliente';
+import { Conta } from './Conta.model';
+import { Gerente } from './Gerente.model';
 
 export class Cliente implements ICliente {
   id: number;
@@ -10,10 +10,19 @@ export class Cliente implements ICliente {
   email: string;
   dataDeNascimento: string;
   cpf: string;
-  contas: Conta[]
+  contas: Conta[];
   gerente: Gerente;
 
-  constructor(id: number, nomeCompleto: string, endereco: string, telefone: string, email: string, dataDeNascimento: string, cpf: string, gerente: Gerente) {
+  constructor(
+    id: number,
+    nomeCompleto: string,
+    endereco: string,
+    telefone: string,
+    email: string,
+    dataDeNascimento: string,
+    cpf: string,
+    gerente: Gerente,
+  ) {
     this.id = id;
     this.nomeCompleto = nomeCompleto;
     this.endereco = endereco;
@@ -29,4 +38,14 @@ export class Cliente implements ICliente {
     this.contas.push(conta);
   }
 
+  removerConta(numeroDaConta: number): void {
+    const index = this.contas.findIndex(
+      (conta) => conta.numeroDaConta === numeroDaConta,
+    );
+    if (index !== -1) {
+      this.contas.splice(index, 1);
+    } else {
+      throw new Error('Conta não encontrada');
+    }
+  }
 }
