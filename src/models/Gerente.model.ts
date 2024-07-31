@@ -3,12 +3,14 @@ import { Conta } from './Conta.model';
 import { ContaCorrente } from './ContaCorrente.model';
 
 export class Gerente {
+  private static nextId: number = 1;
+
   id: number;
   nomeCompleto: string;
   clientes: Cliente[] = [];
 
-  constructor(id: number, nomeCompleto: string) {
-    this.id = id;
+  constructor(nomeCompleto: string) {
+    this.id = Gerente.nextId++;
     this.nomeCompleto = nomeCompleto;
     this.clientes = [];
   }
@@ -28,7 +30,7 @@ export class Gerente {
       email,
       dataDeNascimento,
       cpf,
-      this,
+      this.nomeCompleto,
     );
     this.clientes.push(novoCliente);
     return novoCliente;

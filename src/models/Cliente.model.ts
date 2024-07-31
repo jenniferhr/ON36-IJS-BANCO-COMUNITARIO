@@ -1,6 +1,5 @@
 import { ICliente } from '../interfaces/ICliente';
 import { Conta } from './Conta.model';
-import { Gerente } from './Gerente.model';
 
 export class Cliente implements ICliente {
   private static nextId: number = 1;
@@ -12,7 +11,7 @@ export class Cliente implements ICliente {
   dataDeNascimento: string;
   cpf: string;
   contas: Conta[];
-  gerente: Gerente;
+  gerente: string;
 
   constructor(
     nomeCompleto: string,
@@ -21,7 +20,7 @@ export class Cliente implements ICliente {
     email: string,
     dataDeNascimento: string,
     cpf: string,
-    gerente: Gerente,
+    gerente: string,
   ) {
     this.id = Cliente.nextId++;
     this.nomeCompleto = nomeCompleto;

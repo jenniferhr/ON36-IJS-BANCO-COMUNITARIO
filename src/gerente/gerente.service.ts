@@ -5,8 +5,6 @@ import { Gerente } from 'src/models/Gerente.model';
 
 @Injectable()
 export class GerenteService {
-  private gerentes: Gerente[] = [];
-
   private readonly filePath = path.resolve('src/gerente/gerentes.json');
 
   private readGerentes(): Gerente[] {
@@ -20,7 +18,7 @@ export class GerenteService {
 
   criarGerente(params): Gerente {
     const listaDeGerentes = this.readGerentes();
-    const gerente = new Gerente(params.id, params.nomeCompleto);
+    const gerente = new Gerente(params.nomeCompleto);
 
     listaDeGerentes.push(gerente);
     this.writeGerentes(listaDeGerentes);

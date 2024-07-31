@@ -3,7 +3,7 @@ import { ContaPoupanca } from './models/ContaPoupanca.model';
 import { Gerente } from './models/Gerente.model';
 
 //cria Gerente
-const gerenteCesar = new Gerente(20, 'Cesar Santos');
+const gerenteCesar = new Gerente('Cesar Santos');
 
 //Cria Cliente novo
 const clientePedro = gerenteCesar.criarCliente(
