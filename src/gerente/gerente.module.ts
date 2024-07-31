@@ -5,5 +5,6 @@ import { GerenteController } from './gerente.controller';
 @Module({
   controllers: [GerenteController],
   providers: [GerenteService],
+  exports: [GerenteService],
 })
 export class GerenteModule {}

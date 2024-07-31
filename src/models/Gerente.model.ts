@@ -14,7 +14,6 @@ export class Gerente {
   }
 
   criarCliente(
-    id: number,
     nomeCompleto: string,
     endereco: string,
     telefone: string,
@@ -23,7 +22,6 @@ export class Gerente {
     cpf: string,
   ): Cliente {
     const novoCliente = new Cliente(
-      id,
       nomeCompleto,
       endereco,
       telefone,

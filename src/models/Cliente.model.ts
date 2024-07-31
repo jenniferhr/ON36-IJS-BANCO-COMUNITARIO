@@ -3,6 +3,7 @@ import { Conta } from './Conta.model';
 import { Gerente } from './Gerente.model';
 
 export class Cliente implements ICliente {
+  private static nextId: number = 1;
   id: number;
   nomeCompleto: string;
   endereco: string;
@@ -14,7 +15,6 @@ export class Cliente implements ICliente {
   gerente: Gerente;
 
   constructor(
-    id: number,
     nomeCompleto: string,
     endereco: string,
     telefone: string,
@@ -23,7 +23,7 @@ export class Cliente implements ICliente {
     cpf: string,
     gerente: Gerente,
   ) {
-    this.id = id;
+    this.id = Cliente.nextId++;
     this.nomeCompleto = nomeCompleto;
     this.endereco = endereco;
     this.telefone = telefone;

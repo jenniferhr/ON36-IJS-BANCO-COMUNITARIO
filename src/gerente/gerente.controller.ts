@@ -13,6 +13,6 @@ export class GerenteController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.gerenteService.obterGerentePorId(+id);
+    return this.gerenteService.buscarPorId(+id);
   }
 }
