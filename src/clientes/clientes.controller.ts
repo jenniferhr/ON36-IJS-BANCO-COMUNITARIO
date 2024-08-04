@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CriaClienteDto } from './dto/cria-cliente.dto';
 
@@ -29,10 +29,10 @@ export class ClientesController {
     );
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.clientesService.findAll();
-  // }
+  @Get()
+  buscarTodos() {
+    return this.clientesService.buscarTodosOsClientes();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {

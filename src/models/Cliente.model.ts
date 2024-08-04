@@ -11,7 +11,6 @@ export class Cliente implements ICliente {
   dataDeNascimento: string;
   cpf: string;
   contas: Conta[];
-  gerente: string;
 
   constructor(
     nomeCompleto: string,
@@ -20,7 +19,6 @@ export class Cliente implements ICliente {
     email: string,
     dataDeNascimento: string,
     cpf: string,
-    gerente: string,
   ) {
     this.id = Cliente.nextId++;
     this.nomeCompleto = nomeCompleto;
@@ -29,7 +27,6 @@ export class Cliente implements ICliente {
     this.email = email;
     this.dataDeNascimento = dataDeNascimento;
     this.cpf = cpf;
-    this.gerente = gerente;
     this.contas = [];
   }
 

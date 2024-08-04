@@ -30,9 +30,7 @@ export class Gerente {
       email,
       dataDeNascimento,
       cpf,
-      this.nomeCompleto,
     );
-    this.clientes.push(novoCliente);
     return novoCliente;
   }
 
@@ -44,6 +42,7 @@ export class Gerente {
     numeroDaConta: number,
     clienteId: number,
     limiteChequeEspecial: number,
+    gerente: Gerente,
   ): Conta {
     const clienteDaConta = this.clientes.find(
       (cliente) => cliente.id !== clienteId,
@@ -51,6 +50,7 @@ export class Gerente {
     const contaCorrenteNova = new ContaCorrente(
       numeroDaConta,
       clienteDaConta,
+      gerente,
       limiteChequeEspecial,
     );
     return contaCorrenteNova;
@@ -60,6 +60,7 @@ export class Gerente {
     numeroDaConta: number,
     clienteId: number,
     taxaJuros: number,
+    gerente: Gerente,
   ): Conta {
     const clienteDaConta = this.clientes.find(
       (cliente) => cliente.id !== clienteId,
@@ -67,6 +68,7 @@ export class Gerente {
     const contaPoupancaNova = new ContaCorrente(
       numeroDaConta,
       clienteDaConta,
+      gerente,
       taxaJuros,
     );
     return contaPoupancaNova;

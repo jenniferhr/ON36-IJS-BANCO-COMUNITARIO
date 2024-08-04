@@ -30,8 +30,8 @@ export class GerenteService {
     const listaDeGerentes = this.readGerentes();
     const gerente = listaDeGerentes.find((gerente) => gerente.id === id);
     if (!gerente) {
-      throw new NotFoundException(`Gerente com ${id} não foi encontrado`);
+      throw new NotFoundException(`Gerente com id ${id} não foi encontrado`);
     }
-    return gerente;
+    return gerente as Gerente;
   }
 }

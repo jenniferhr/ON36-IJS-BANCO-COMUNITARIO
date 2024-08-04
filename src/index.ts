@@ -1,28 +1,28 @@
-import { ContaCorrente } from './models/ContaCorrente.model';
-import { ContaPoupanca } from './models/ContaPoupanca.model';
-import { Gerente } from './models/Gerente.model';
+// import { ContaCorrente } from './models/ContaCorrente.model';
+// import { ContaPoupanca } from './models/ContaPoupanca.model';
+// import { Gerente } from './models/Gerente.model';
 
 //cria Gerente
-const gerenteCesar = new Gerente('Cesar Santos');
+// const gerenteCesar = new Gerente('Cesar Santos');
 
-//Cria Cliente novo
-const clientePedro = gerenteCesar.criarCliente(
-  'Pedro Alves',
-  'Rua das Bananas, 199, São Paulo',
-  '11987356426',
-  'pedrosilva@gmail.com',
-  '27-07-1997',
-  '123.456.789-01',
-);
-console.log(clientePedro.gerente);
+// //Cria Cliente novo
+// const clientePedro = gerenteCesar.criarCliente(
+//   'Pedro Alves',
+//   'Rua das Bananas, 199, São Paulo',
+//   '11987356426',
+//   'pedrosilva@gmail.com',
+//   '27-07-1997',
+//   '123.456.789-01',
+// );
+// console.log(clientePedro.gerente);
 
-// Cria contas para o cliente
-const contaCorrentePedro = new ContaCorrente(123, clientePedro, 200);
-const ContaPoupancaPedro = new ContaPoupanca(987, clientePedro, 2);
+// // Cria contas para o cliente
+// const contaCorrentePedro = new ContaCorrente(123, clientePedro, 200);
+// const ContaPoupancaPedro = new ContaPoupanca(987, clientePedro, 2);
 
-// // Adiciona contas ao cliente
-clientePedro.adicionarConta(contaCorrentePedro);
-clientePedro.adicionarConta(ContaPoupancaPedro);
+// // // Adiciona contas ao cliente
+// clientePedro.adicionarConta(contaCorrentePedro);
+// clientePedro.adicionarConta(ContaPoupancaPedro);
 
 // Testes:
 // console.log(clientePedro);
