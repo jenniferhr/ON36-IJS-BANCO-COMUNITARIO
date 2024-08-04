@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CriaClienteDto } from './dto/cria-cliente.dto';
 
@@ -34,10 +34,10 @@ export class ClientesController {
     return this.clientesService.buscarTodosOsClientes();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.clientesService.findOne(+id);
-  // }
+  @Get(':id')
+  buscarUm(@Param('id') id: string) {
+    return this.clientesService.buscarPorId(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {

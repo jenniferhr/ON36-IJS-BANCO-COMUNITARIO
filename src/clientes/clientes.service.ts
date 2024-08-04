@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { GerenteService } from 'src/gerente/gerente.service';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -61,9 +61,16 @@ export class ClientesService {
     return listaDeClientes;
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} cliente`;
-  // }
+  buscarPorId(id: number): Cliente {
+    const listaDeeClientes = this.readClientes();
+
+    const cliente = listaDeeClientes.find((cliente) => cliente.id === id);
+    if (!cliente) {
+      throw new NotFoundException(`Gerente com id ${id} não foi encontrado`);
+    }
+    return cliente as Cliente;
+  }
+
   // update(id: number, updateClienteDto: UpdateClienteDto) {
   //   return `This action updates a #${id} cliente`;
   // }
