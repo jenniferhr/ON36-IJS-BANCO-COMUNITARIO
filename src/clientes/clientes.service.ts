@@ -71,10 +71,26 @@ export class ClientesService {
     return cliente as Cliente;
   }
 
-  // update(id: number, updateClienteDto: UpdateClienteDto) {
-  //   return `This action updates a #${id} cliente`;
-  // }
-  // remove(id: number) {
-  //   return `This action removes a #${id} cliente`;
-  // }
+  removerCliente(idCliente: number, idGerente: number): Cliente[] {
+    console.log(idCliente, idGerente);
+    const gerente = this.gerenteService.buscarPorId(+idGerente);
+    if (!gerente) {
+      throw new Error('Gerente não encontrado');
+    }
+
+    const gerenteResponsavel = Object.setPrototypeOf(
+      gerente,
+      Gerente.prototype,
+    );
+    gerenteResponsavel.removerCliente(idCliente);
+    console.log(gerenteResponsavel);
+
+    const listaDeClientes = this.readClientes();
+    const listaAtualizada = listaDeClientes.filter(
+      (clientes) => clientes.id !== idCliente,
+    );
+
+    this.writeClientes(listaAtualizada);
+    return listaAtualizada;
+  }
 }

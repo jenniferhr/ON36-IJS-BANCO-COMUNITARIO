@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CriaClienteDto } from './dto/cria-cliente.dto';
 
@@ -39,13 +47,11 @@ export class ClientesController {
     return this.clientesService.buscarPorId(+id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {
-  //   return this.clientesService.update(+id, updateClienteDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.clientesService.remove(+id);
-  // }
+  @Delete(':idCliente')
+  removeUm(
+    @Param('idCliente') idCliente: string,
+    @Query('idGerente') idGerente: string,
+  ) {
+    return this.clientesService.removerCliente(+idCliente, +idGerente);
+  }
 }
