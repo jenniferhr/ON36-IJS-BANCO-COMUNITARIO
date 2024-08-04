@@ -72,7 +72,6 @@ export class ClientesService {
   }
 
   removerCliente(idCliente: number, idGerente: number): Cliente[] {
-    console.log(idCliente, idGerente);
     const gerente = this.gerenteService.buscarPorId(+idGerente);
     if (!gerente) {
       throw new Error('Gerente não encontrado');
@@ -83,7 +82,6 @@ export class ClientesService {
       Gerente.prototype,
     );
     gerenteResponsavel.removerCliente(idCliente);
-    console.log(gerenteResponsavel);
 
     const listaDeClientes = this.readClientes();
     const listaAtualizada = listaDeClientes.filter(
