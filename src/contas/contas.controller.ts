@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ContasService } from './contas.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { UpdateContaDto } from './dto/update-conta.dto';
@@ -9,12 +17,12 @@ export class ContasController {
 
   @Post()
   create(@Body() createContaDto: CreateContaDto) {
-    return this.contasService.create(createContaDto);
+    return this.contasService.criarConta(createContaDto);
   }
 
   @Get()
   findAll() {
-    return this.contasService.findAll();
+    return this.contasService.buscarTodasAsContas();
   }
 
   @Get(':id')
