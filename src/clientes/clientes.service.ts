@@ -62,11 +62,11 @@ export class ClientesService {
   }
 
   buscarPorId(id: number): Cliente {
-    const listaDeeClientes = this.readClientes();
+    const listaDeClientes = this.readClientes();
 
-    const cliente = listaDeeClientes.find((cliente) => cliente.id === id);
+    const cliente = listaDeClientes.find((cliente) => cliente.id === id);
     if (!cliente) {
-      throw new NotFoundException(`Gerente com id ${id} não foi encontrado`);
+      throw new NotFoundException(`Cliente com id ${id} não foi encontrado`);
     }
     return cliente as Cliente;
   }

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { TipoConta } from 'src/interfaces/IConta';
 import { GerenteService } from 'src/gerente/gerente.service';
@@ -92,7 +96,17 @@ export class ContasService {
   }
 
   buscarPorNumero(numeroDaConta: number) {
-    return `This action returns a #${numeroDaConta} conta`;
+    const listaDeContas = this.readContas();
+
+    const conta = listaDeContas.find(
+      (conta) => conta.numeroDaConta === numeroDaConta,
+    );
+    if (!conta) {
+      throw new NotFoundException(
+        `Conta com número ${numeroDaConta} não foi encontrado`,
+      );
+    }
+    return conta as Conta;
   }
 
   // update(id: number, updateContaDto: UpdateContaDto) {
