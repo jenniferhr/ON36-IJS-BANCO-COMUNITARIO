@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateContaDto } from './dto/create-conta.dto';
-import { UpdateContaDto } from './dto/update-conta.dto';
 import { TipoConta } from 'src/interfaces/IConta';
 import { GerenteService } from 'src/gerente/gerente.service';
 import { Gerente } from 'src/models/Gerente.model';
@@ -92,15 +91,15 @@ export class ContasService {
     return listaDeContas;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} conta`;
+  buscarPorNumero(numeroDaConta: number) {
+    return `This action returns a #${numeroDaConta} conta`;
   }
 
-  update(id: number, updateContaDto: UpdateContaDto) {
-    return `This action updates a #${id} conta`;
-  }
+  // update(id: number, updateContaDto: UpdateContaDto) {
+  //   return `This action updates a #${id} conta`;
+  // }
 
-  remove(id: number) {
+  removerConta(id: number) {
     return `This action removes a #${id} conta`;
   }
 }
