@@ -50,6 +50,9 @@ export class ClientesService {
       cpf,
     );
 
+    gerenteResponsavel.adicionarClienteAoGerente(novoCliente);
+    this.gerenteService.atualizarGerente(gerenteResponsavel);
+
     listaDeClientes.push(novoCliente);
     this.writeClientes(listaDeClientes);
 
@@ -90,5 +93,19 @@ export class ClientesService {
 
     this.writeClientes(listaAtualizada);
     return listaAtualizada;
+  }
+
+  atualizarCliente(cliente: Cliente): void {
+    console.log(
+      `Atualizando cliente com id ${cliente.id}: ${JSON.stringify(cliente)}`,
+    );
+
+    const listaDeClientes = this.readClientes();
+    const index = listaDeClientes.findIndex((c) => c.id === cliente.id);
+
+    if (index !== -1) {
+      listaDeClientes[index] = cliente;
+      this.writeClientes(listaDeClientes);
+    }
   }
 }

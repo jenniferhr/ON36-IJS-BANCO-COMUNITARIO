@@ -34,6 +34,10 @@ export class Gerente {
     return novoCliente;
   }
 
+  adicionarClienteAoGerente(cliente: Cliente) {
+    this.clientes.push(cliente);
+  }
+
   removerCliente(clienteId: number): void {
     this.clientes = this.clientes.filter((cliente) => cliente.id !== clienteId);
   }
@@ -45,7 +49,7 @@ export class Gerente {
     gerente: Gerente,
   ): Conta {
     const clienteDaConta = this.clientes.find(
-      (cliente) => cliente.id !== clienteId,
+      (cliente) => cliente.id === clienteId,
     );
     const contaCorrenteNova = new ContaCorrente(
       numeroDaConta,
@@ -63,7 +67,7 @@ export class Gerente {
     gerente: Gerente,
   ): Conta {
     const clienteDaConta = this.clientes.find(
-      (cliente) => cliente.id !== clienteId,
+      (cliente) => cliente.id === clienteId,
     );
     const contaPoupancaNova = new ContaCorrente(
       numeroDaConta,
@@ -75,14 +79,17 @@ export class Gerente {
   }
 
   adicionarContasACliente(cliente: Cliente, conta: Conta): void {
+    Object.setPrototypeOf(cliente, Cliente.prototype);
     cliente.adicionarConta(conta);
   }
 
   fecharConta(clienteId: number, numeroDaConta: number): void {
+    console.log('clientes desse gerente', this.clientes);
     const cliente = this.clientes.find((cliente) => cliente.id === clienteId);
     if (!cliente) {
       throw new Error('Cliente não encontrado');
     }
-    cliente.removerConta(numeroDaConta);
+    const clienteDaConta = Object.setPrototypeOf(cliente, Cliente.prototype);
+    clienteDaConta.removerConta(numeroDaConta);
   }
 }

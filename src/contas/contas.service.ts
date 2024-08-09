@@ -10,6 +10,7 @@ import { Gerente } from 'src/models/Gerente.model';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Conta } from 'src/models/Conta.model';
+import { ClientesService } from 'src/clientes/clientes.service';
 
 @Injectable()
 export class ContasService {
@@ -23,9 +24,12 @@ export class ContasService {
   private writeContas(contas: Conta[]): void {
     fs.writeFileSync(this.filePath, JSON.stringify(contas, null, 2), 'utf8');
   }
-  constructor(private readonly gerenteService: GerenteService) {}
+  constructor(
+    private readonly gerenteService: GerenteService,
+    private readonly clientesService: ClientesService,
+  ) {}
 
-  TODO: 'Adicionar validação pra não adicionar conta duplicada; Fazer com que ele coloque as contas na propriedade contas do cliente no json';
+  // TODO: 'Adicionar validação pra não adicionar conta duplicada; Fazer com que ele coloque as contas na propriedade contas do cliente no json; fazer com que ele retorne o erro que o método do gerente retorna já que o try catch não está funcionando pra isso';
   criarConta(createContaDto: CreateContaDto) {
     const {
       idCliente,
@@ -54,7 +58,12 @@ export class ContasService {
       Gerente.prototype,
     );
 
-    let contaCriada = null;
+    let contaCriada: Conta = null;
+
+    const cliente = this.clientesService.buscarPorId(+idCliente);
+    if (!cliente) {
+      throw new Error('Cliente não encontrado');
+    }
 
     if (tipo === TipoConta.Corrente) {
       if (limiteChequeEspecial == null) {
@@ -62,12 +71,16 @@ export class ContasService {
           'O limite do cheque especial é obrigatório para contas correntes',
         );
       }
-      contaCriada = gerenteResponsavel.abrirContaCorrente(
-        numeroConta,
-        idCliente,
-        limiteChequeEspecial,
-        gerenteResponsavel,
-      );
+      try {
+        contaCriada = gerenteResponsavel.abrirContaCorrente(
+          numeroConta,
+          idCliente,
+          limiteChequeEspecial,
+          gerenteResponsavel,
+        );
+      } catch (err) {
+        throw err;
+      }
     }
 
     if (tipo === TipoConta.Poupanca) {
@@ -76,17 +89,25 @@ export class ContasService {
           'A taxa de juros é obrigatória para contas poupança',
         );
       }
-      contaCriada = gerenteResponsavel.abrirContaPoupanca(
-        numeroConta,
-        idCliente,
-        taxaJuros,
-        gerenteResponsavel,
-      );
+      try {
+        contaCriada = gerenteResponsavel.abrirContaPoupanca(
+          numeroConta,
+          idCliente,
+          taxaJuros,
+          gerenteResponsavel,
+        );
+      } catch (err) {
+        throw err;
+      }
     }
+
+    gerenteResponsavel.adicionarContasACliente(cliente, contaCriada);
+    this.clientesService.atualizarCliente(cliente);
 
     const listaDeContas = this.readContas();
     listaDeContas.push(contaCriada);
     this.writeContas(listaDeContas);
+
     return contaCriada;
   }
 
@@ -113,7 +134,26 @@ export class ContasService {
   //   return `This action updates a #${id} conta`;
   // }
 
-  removerConta(id: number) {
-    return `This action removes a #${id} conta`;
+  // TODO: consertar essa remoção pra garantir que está sendo removida mesmo em todo lugar
+  removerConta(numeroDaConta: number, idGerente: number) {
+    const gerente = this.gerenteService.buscarPorId(+idGerente);
+    if (!gerente) {
+      throw new Error('Gerente não encontrado');
+    }
+
+    const gerenteResponsavel = Object.setPrototypeOf(
+      gerente,
+      Gerente.prototype,
+    );
+
+    this.gerenteService.atualizarGerente(gerenteResponsavel);
+
+    const listaDeContas = this.readContas();
+    const listaAtualizada = listaDeContas.filter(
+      (contas) => contas.numeroDaConta !== numeroDaConta,
+    );
+
+    this.writeContas(listaAtualizada);
+    return listaAtualizada;
   }
 }

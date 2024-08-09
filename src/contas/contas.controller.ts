@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { ContasService } from './contas.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 
@@ -21,14 +29,17 @@ export class ContasController {
     return this.contasService.buscarPorNumero(+numeroDaConta);
   }
 
-  TODO: 'Implementar mudança de tipo de conta';
+  // TODO: 'Implementar mudança de tipo de conta';
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateContaDto: UpdateContaDto) {
   //   return this.contasService.update(+id, updateContaDto);
   // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.contasService.removerConta(+id);
+  @Delete(':numeroConta')
+  remove(
+    @Param('numeroConta') numeroConta: string,
+    @Query('idGerente') idGerente: string,
+  ) {
+    return this.contasService.removerConta(+numeroConta, +idGerente);
   }
 }

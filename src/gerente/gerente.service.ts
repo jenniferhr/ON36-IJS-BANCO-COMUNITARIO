@@ -34,4 +34,15 @@ export class GerenteService {
     }
     return gerente as Gerente;
   }
+
+  atualizarGerente(gerenteAtualizado: Gerente): void {
+    const listaDeGerentes = this.readGerentes();
+    const index = listaDeGerentes.findIndex(
+      (gerente) => gerente.id === gerenteAtualizado.id,
+    );
+    if (index !== -1) {
+      listaDeGerentes[index] = gerenteAtualizado;
+      this.writeGerentes(listaDeGerentes);
+    }
+  }
 }

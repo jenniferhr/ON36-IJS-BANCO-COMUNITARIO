@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { TipoConta } from 'src/interfaces/IConta';
 
-TODO: 'Corrigir essa validação pra fazer ela funcionar';
+// TODO: 'Corrigir essa validação pra fazer ela funcionar';
 export class CreateContaDto {
   @IsNotEmpty()
   @IsNumber()

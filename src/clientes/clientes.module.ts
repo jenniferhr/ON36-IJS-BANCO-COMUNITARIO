@@ -7,5 +7,6 @@ import { GerenteModule } from 'src/gerente/gerente.module';
   imports: [GerenteModule],
   controllers: [ClientesController],
   providers: [ClientesService],
+  exports: [ClientesService],
 })
 export class ClientesModule {}
