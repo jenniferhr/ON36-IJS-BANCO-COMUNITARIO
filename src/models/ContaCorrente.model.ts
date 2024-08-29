@@ -12,8 +12,7 @@ export class ContaCorrente extends Conta {
     gerente: Gerente,
     limiteChequeEspecial: number,
   ) {
-    super(numeroDaConta, cliente, gerente);
+    super(numeroDaConta, cliente, gerente, TipoConta.Corrente);
     this.limiteChequeEspecial = limiteChequeEspecial;
-    this.tipo = TipoConta.Corrente;
   }
 }

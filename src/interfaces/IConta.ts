@@ -10,4 +10,5 @@ export interface IConta {
   cliente: Cliente;
   saldo: number;
   tipo: TipoConta;
+  ativa: boolean;
 }

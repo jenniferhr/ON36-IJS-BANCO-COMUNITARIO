@@ -8,11 +8,19 @@ export abstract class Conta implements IConta {
   saldo: number;
   tipo: TipoConta;
   gerente: string;
+  ativa: boolean;
 
-  constructor(numeroDaConta: number, cliente: Cliente, gerente: Gerente) {
+  constructor(
+    numeroDaConta: number,
+    cliente: Cliente,
+    gerente: Gerente,
+    tipo: TipoConta,
+  ) {
     this.numeroDaConta = numeroDaConta;
     this.cliente = cliente;
     this.saldo = 0;
+    this.tipo = tipo;
     this.gerente = gerente.nomeCompleto;
+    this.ativa = true;
   }
 }

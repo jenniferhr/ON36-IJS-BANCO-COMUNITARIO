@@ -12,8 +12,7 @@ export class ContaPoupanca extends Conta {
     gerente: Gerente,
     taxaJuros: number,
   ) {
-    super(numeroDaConta, cliente, gerente);
+    super(numeroDaConta, cliente, gerente, TipoConta.Poupanca);
     this.taxaJuros = taxaJuros;
-    this.tipo = TipoConta.Poupanca;
   }
 }
