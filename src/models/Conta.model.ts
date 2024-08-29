@@ -15,20 +15,4 @@ export abstract class Conta implements IConta {
     this.saldo = 0;
     this.gerente = gerente.nomeCompleto;
   }
-
-  depositar(valor: number): void {
-    this.saldo += valor;
-  }
-
-  sacar(valor: number): void {
-    if (this.saldo >= valor) {
-      this.saldo -= valor;
-    } else {
-      console.log(
-        `Saldo insuficiente para a transação. Saldo atual: ${this.saldo}`,
-      );
-    }
-  }
-
-  abstract transferir(valor: number, contaDestino: Conta): void;
 }

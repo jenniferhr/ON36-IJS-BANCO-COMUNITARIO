@@ -1,4 +1,4 @@
-import { Conta } from "../models/Conta.model";
+import { Conta } from '../models/Conta.model';
 
 export interface ICliente {
   id: number;
@@ -9,6 +9,4 @@ export interface ICliente {
   dataDeNascimento: string;
   cpf: string;
   contas: Conta[];
-
-  adicionarConta(conta: Conta): void;
 }
