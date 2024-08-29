@@ -3,7 +3,6 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { GerenteService } from 'src/gerente/gerente.service';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Cliente } from 'src/models/Cliente.model';
@@ -19,8 +18,6 @@ export class ClientesService {
   private writeClientes(clientes: Cliente[]): void {
     fs.writeFileSync(this.filePath, JSON.stringify(clientes, null, 2), 'utf8');
   }
-
-  constructor(private readonly gerenteService: GerenteService) {}
 
   criarClienteNovo(criaClienteDto): Cliente {
     const { nomeCompleto, endereco, telefone, email, dataDeNascimento, cpf } =
@@ -63,7 +60,6 @@ export class ClientesService {
     return clienteExistente;
   }
 
-  //TODO: analisar a necessidade.
   atualizarCliente(cliente: Cliente): void {
     const listaDeClientes = this.readClientes();
     const index = listaDeClientes.findIndex((c) => c.id === cliente.id);
