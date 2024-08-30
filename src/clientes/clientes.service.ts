@@ -6,6 +6,7 @@ import {
 import * as path from 'path';
 import * as fs from 'fs';
 import { Cliente } from 'src/models/Cliente.model';
+import { Conta } from 'src/models/Conta.model';
 @Injectable()
 export class ClientesService {
   private readonly filePath = path.resolve('src/clientes/clientes.json');
@@ -60,16 +61,6 @@ export class ClientesService {
     return clienteExistente;
   }
 
-  atualizarCliente(cliente: Cliente): void {
-    const listaDeClientes = this.readClientes();
-    const index = listaDeClientes.findIndex((c) => c.id === cliente.id);
-
-    if (index !== -1) {
-      listaDeClientes[index] = cliente;
-      this.writeClientes(listaDeClientes);
-    }
-  }
-
   removerCliente(idCliente: number): Cliente[] {
     const listaDeClientes = this.readClientes();
     const listaAtualizada = listaDeClientes.filter(
@@ -78,6 +69,17 @@ export class ClientesService {
 
     this.writeClientes(listaAtualizada);
     return listaAtualizada;
+  }
+
+  adicionarContaACliente(conta: Conta) {
+    const idCliente = conta.cliente.id;
+    const cliente = this.buscarPorIdInterno(idCliente);
+
+    const contaSemCliente = { ...conta };
+    delete contaSemCliente.cliente;
+
+    cliente.contas.push(contaSemCliente);
+    this.atualizarCliente(cliente);
   }
 
   private buscarPorCPF(cpf): Cliente {
@@ -94,5 +96,17 @@ export class ClientesService {
     const cliente = listaDeClientes.find((cliente) => cliente.id === id);
 
     return cliente || null;
+  }
+
+  private atualizarCliente(cliente: Cliente): void {
+    const listaDeClientes = this.readClientes();
+    const index = listaDeClientes.findIndex((c) => c.id === cliente.id);
+
+    if (index === -1) {
+      throw new Error('Cliente não existe');
+    }
+
+    listaDeClientes[index] = cliente;
+    this.writeClientes(listaDeClientes);
   }
 }

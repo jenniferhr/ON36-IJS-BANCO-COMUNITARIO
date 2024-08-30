@@ -30,7 +30,6 @@ export class ContasService {
     private readonly contasFactory: ContasFactory,
   ) {}
 
-  // TODO: Fazer função pra adicionar a conta nova ao cliente
   criarConta(createContaDto: CreateContaDto) {
     const { idCliente, idGerente, numeroConta, tipo, ...adicionais } =
       createContaDto;
@@ -45,7 +44,6 @@ export class ContasService {
       throw new Error('Cliente não encontrado');
     }
 
-    // Fazer uma cópia do objeto cliente sem a propriedade 'contas'
     const clienteSemContas = { ...cliente };
     delete clienteSemContas.contas;
 
@@ -60,6 +58,8 @@ export class ContasService {
     if (!contaNova) {
       throw new InternalServerErrorException('A conta não pôde ser criada.');
     }
+
+    this.clientesService.adicionarContaACliente(contaNova);
 
     const listaDeContas = this.readContas();
     listaDeContas.push(contaNova);
