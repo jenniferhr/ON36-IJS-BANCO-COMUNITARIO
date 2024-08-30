@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { GerenteService } from 'src/gerente/gerente.service';
-import { Gerente } from 'src/models/Gerente.model';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Conta } from 'src/models/Conta.model';
@@ -87,26 +86,17 @@ export class ContasService {
     return conta as Conta;
   }
 
-  // TODO: consertar essa remoção pra garantir que está sendo removida mesmo em todo lugar
-  removerConta(numeroDaConta: number, idGerente: number) {
-    const gerente = this.gerenteService.buscarPorId(+idGerente);
-    if (!gerente) {
-      throw new Error('Gerente não encontrado');
-    }
-
-    const gerenteResponsavel = Object.setPrototypeOf(
-      gerente,
-      Gerente.prototype,
-    );
-
-    this.gerenteService.atualizarGerente(gerenteResponsavel);
+  removerConta(numeroDaConta: number) {
+    const conta = this.buscarPorNumero(numeroDaConta);
 
     const listaDeContas = this.readContas();
     const listaAtualizada = listaDeContas.filter(
       (contas) => contas.numeroDaConta !== numeroDaConta,
     );
-
     this.writeContas(listaAtualizada);
+
+    this.clientesService.removerContaDeCliente(conta);
+
     return listaAtualizada;
   }
 }

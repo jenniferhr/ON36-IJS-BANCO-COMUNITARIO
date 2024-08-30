@@ -82,6 +82,17 @@ export class ClientesService {
     this.atualizarCliente(cliente);
   }
 
+  removerContaDeCliente(conta: Conta) {
+    const idCliente = conta.cliente.id;
+    const cliente = this.buscarPorIdInterno(idCliente);
+
+    cliente.contas = cliente.contas.filter(
+      (c) => c.numeroDaConta !== conta.numeroDaConta,
+    );
+
+    this.atualizarCliente(cliente);
+  }
+
   private buscarPorCPF(cpf): Cliente {
     const listaDeClientes = this.readClientes();
 
