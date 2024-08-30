@@ -29,19 +29,4 @@ export class Cliente implements ICliente {
     this.cpf = cpf;
     this.contas = [];
   }
-
-  adicionarConta(conta: Conta) {
-    this.contas.push(conta);
-  }
-
-  removerConta(numeroDaConta: number): void {
-    const index = this.contas.findIndex(
-      (conta) => conta.numeroDaConta === numeroDaConta,
-    );
-    if (index !== -1) {
-      this.contas.splice(index, 1);
-    } else {
-      throw new Error('Conta não encontrada');
-    }
-  }
 }

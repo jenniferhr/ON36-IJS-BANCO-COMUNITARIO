@@ -12,19 +12,7 @@ export class ContaCorrente extends Conta {
     gerente: Gerente,
     limiteChequeEspecial: number,
   ) {
-    super(numeroDaConta, cliente, gerente);
+    super(numeroDaConta, cliente, gerente, TipoConta.Corrente);
     this.limiteChequeEspecial = limiteChequeEspecial;
-    this.tipo = TipoConta.Corrente;
-  }
-
-  transferir(valor: number, contaDestino: Conta): void {
-    if (this.saldo + this.limiteChequeEspecial >= valor) {
-      this.sacar(valor);
-      contaDestino.depositar(valor);
-    } else {
-      console.log(
-        'Não há saldo ou limite no cheque especial suficiente para a transferência.',
-      );
-    }
   }
 }

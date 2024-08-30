@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { ContasService } from './contas.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 
@@ -36,10 +28,7 @@ export class ContasController {
   // }
 
   @Delete(':numeroConta')
-  remove(
-    @Param('numeroConta') numeroConta: string,
-    @Query('idGerente') idGerente: string,
-  ) {
-    return this.contasService.removerConta(+numeroConta, +idGerente);
+  remove(@Param('numeroConta') numeroConta: string) {
+    return this.contasService.removerConta(+numeroConta);
   }
 }

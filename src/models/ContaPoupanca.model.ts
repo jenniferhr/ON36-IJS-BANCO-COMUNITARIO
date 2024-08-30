@@ -12,19 +12,7 @@ export class ContaPoupanca extends Conta {
     gerente: Gerente,
     taxaJuros: number,
   ) {
-    super(numeroDaConta, cliente, gerente);
+    super(numeroDaConta, cliente, gerente, TipoConta.Poupanca);
     this.taxaJuros = taxaJuros;
-    this.tipo = TipoConta.Poupanca;
-  }
-
-  transferir(valor: number, contaDestino: Conta): void {
-    if (this.saldo >= valor) {
-      this.sacar(valor);
-      contaDestino.depositar(valor);
-    } else {
-      console.log(
-        `Saldo insuficiente para a transação. Saldo atual: ${this.saldo}`,
-      );
-    }
   }
 }

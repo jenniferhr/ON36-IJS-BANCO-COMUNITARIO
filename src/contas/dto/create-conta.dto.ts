@@ -3,11 +3,11 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  Min,
   ValidateIf,
 } from 'class-validator';
 import { TipoConta } from 'src/interfaces/IConta';
 
-// TODO: 'Corrigir essa validação pra fazer ela funcionar';
 export class CreateContaDto {
   @IsNotEmpty()
   @IsNumber()
@@ -28,10 +28,12 @@ export class CreateContaDto {
   @ValidateIf((o) => o.tipo === TipoConta.Poupanca)
   @IsOptional()
   @IsNumber()
+  @Min(0)
   taxaJuros?: number;
 
   @ValidateIf((o) => o.tipo === TipoConta.Corrente)
   @IsOptional()
   @IsNumber()
+  @Min(0)
   limiteChequeEspecial?: number;
 }

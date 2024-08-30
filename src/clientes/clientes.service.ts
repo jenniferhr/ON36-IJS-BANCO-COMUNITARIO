@@ -1,10 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { GerenteService } from 'src/gerente/gerente.service';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Cliente } from 'src/models/Cliente.model';
-import { Gerente } from 'src/models/Gerente.model';
-
+import { Conta } from 'src/models/Conta.model';
 @Injectable()
 export class ClientesService {
   private readonly filePath = path.resolve('src/clientes/clientes.json');
@@ -18,30 +20,16 @@ export class ClientesService {
     fs.writeFileSync(this.filePath, JSON.stringify(clientes, null, 2), 'utf8');
   }
 
-  constructor(private readonly gerenteService: GerenteService) {}
+  criarClienteNovo(criaClienteDto): Cliente {
+    const { nomeCompleto, endereco, telefone, email, dataDeNascimento, cpf } =
+      criaClienteDto;
 
-  criarClienteNovo(
-    gerenteId,
-    nomeCompleto,
-    endereco,
-    telefone,
-    email,
-    dataDeNascimento,
-    cpf,
-  ): Cliente {
-    const gerente = this.gerenteService.buscarPorId(+gerenteId);
-    if (!gerente) {
-      throw new Error('Gerente não encontrado');
+    const clienteExistente = this.buscarPorCPF(cpf);
+    if (clienteExistente) {
+      throw new ConflictException('Um cliente com esse CPF já existe.');
     }
 
-    const gerenteResponsavel = Object.setPrototypeOf(
-      gerente,
-      Gerente.prototype,
-    );
-
-    const listaDeClientes = this.readClientes();
-
-    const novoCliente = gerenteResponsavel.criarCliente(
+    const clienteNovo = new Cliente(
       nomeCompleto,
       endereco,
       telefone,
@@ -50,13 +38,11 @@ export class ClientesService {
       cpf,
     );
 
-    gerenteResponsavel.adicionarClienteAoGerente(novoCliente);
-    this.gerenteService.atualizarGerente(gerenteResponsavel);
-
-    listaDeClientes.push(novoCliente);
+    const listaDeClientes = this.readClientes();
+    listaDeClientes.push(clienteNovo);
     this.writeClientes(listaDeClientes);
 
-    return novoCliente;
+    return clienteNovo;
   }
 
   buscarTodosOsClientes() {
@@ -64,28 +50,18 @@ export class ClientesService {
     return listaDeClientes;
   }
 
-  buscarPorId(id: number): Cliente {
-    const listaDeClientes = this.readClientes();
-
-    const cliente = listaDeClientes.find((cliente) => cliente.id === id);
-    if (!cliente) {
-      throw new NotFoundException(`Cliente com id ${id} não foi encontrado`);
+  buscarClientePorId(id: number): Cliente {
+    const clienteExistente = this.buscarPorIdInterno(id);
+    if (!clienteExistente) {
+      throw new NotFoundException(
+        `Nenhum cliente com o id ${id} foi encontrado.`,
+      );
     }
-    return cliente as Cliente;
+
+    return clienteExistente;
   }
 
-  removerCliente(idCliente: number, idGerente: number): Cliente[] {
-    const gerente = this.gerenteService.buscarPorId(+idGerente);
-    if (!gerente) {
-      throw new Error('Gerente não encontrado');
-    }
-
-    const gerenteResponsavel = Object.setPrototypeOf(
-      gerente,
-      Gerente.prototype,
-    );
-    gerenteResponsavel.removerCliente(idCliente);
-
+  removerCliente(idCliente: number): Cliente[] {
     const listaDeClientes = this.readClientes();
     const listaAtualizada = listaDeClientes.filter(
       (clientes) => clientes.id !== idCliente,
@@ -95,17 +71,53 @@ export class ClientesService {
     return listaAtualizada;
   }
 
-  atualizarCliente(cliente: Cliente): void {
-    console.log(
-      `Atualizando cliente com id ${cliente.id}: ${JSON.stringify(cliente)}`,
+  adicionarContaACliente(conta: Conta) {
+    const idCliente = conta.cliente.id;
+    const cliente = this.buscarPorIdInterno(idCliente);
+
+    const contaSemCliente = { ...conta };
+    delete contaSemCliente.cliente;
+
+    cliente.contas.push(contaSemCliente);
+    this.atualizarCliente(cliente);
+  }
+
+  removerContaDeCliente(conta: Conta) {
+    const idCliente = conta.cliente.id;
+    const cliente = this.buscarPorIdInterno(idCliente);
+
+    cliente.contas = cliente.contas.filter(
+      (c) => c.numeroDaConta !== conta.numeroDaConta,
     );
 
+    this.atualizarCliente(cliente);
+  }
+
+  private buscarPorCPF(cpf): Cliente {
+    const listaDeClientes = this.readClientes();
+
+    const cliente = listaDeClientes.find((cliente) => cliente.cpf === cpf);
+
+    return cliente || null;
+  }
+
+  private buscarPorIdInterno(id: number): Cliente {
+    const listaDeClientes = this.readClientes();
+
+    const cliente = listaDeClientes.find((cliente) => cliente.id === id);
+
+    return cliente || null;
+  }
+
+  private atualizarCliente(cliente: Cliente): void {
     const listaDeClientes = this.readClientes();
     const index = listaDeClientes.findIndex((c) => c.id === cliente.id);
 
-    if (index !== -1) {
-      listaDeClientes[index] = cliente;
-      this.writeClientes(listaDeClientes);
+    if (index === -1) {
+      throw new Error('Cliente não existe');
     }
+
+    listaDeClientes[index] = cliente;
+    this.writeClientes(listaDeClientes);
   }
 }

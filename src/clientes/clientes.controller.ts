@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CriaClienteDto } from './dto/cria-cliente.dto';
 
@@ -16,25 +8,7 @@ export class ClientesController {
 
   @Post()
   create(@Body() criaClienteDto: CriaClienteDto) {
-    const {
-      gerenteId,
-      nomeCompleto,
-      endereco,
-      telefone,
-      email,
-      dataDeNascimento,
-      cpf,
-    } = criaClienteDto;
-
-    return this.clientesService.criarClienteNovo(
-      gerenteId,
-      nomeCompleto,
-      endereco,
-      telefone,
-      email,
-      dataDeNascimento,
-      cpf,
-    );
+    return this.clientesService.criarClienteNovo(criaClienteDto);
   }
 
   @Get()
@@ -44,14 +18,11 @@ export class ClientesController {
 
   @Get(':id')
   buscarUm(@Param('id') id: string) {
-    return this.clientesService.buscarPorId(+id);
+    return this.clientesService.buscarClientePorId(+id);
   }
 
-  @Delete(':idCliente')
-  removeUm(
-    @Param('idCliente') idCliente: string,
-    @Query('idGerente') idGerente: string,
-  ) {
-    return this.clientesService.removerCliente(+idCliente, +idGerente);
+  @Delete(':id')
+  removeUm(@Param('id') id: string) {
+    return this.clientesService.removerCliente(+id);
   }
 }
