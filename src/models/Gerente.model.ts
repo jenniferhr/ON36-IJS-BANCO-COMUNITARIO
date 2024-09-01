@@ -1,14 +1,13 @@
+import { randomUUID } from 'crypto';
 import { Cliente } from './Cliente.model';
 
 export class Gerente {
-  private static nextId: number = 1;
-
-  id: number;
+  id: string;
   nomeCompleto: string;
   clientes: Cliente[] = [];
 
   constructor(nomeCompleto: string) {
-    this.id = Gerente.nextId++;
+    this.id = randomUUID();
     this.nomeCompleto = nomeCompleto;
     this.clientes = [];
   }

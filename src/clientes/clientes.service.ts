@@ -3,22 +3,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import * as path from 'path';
-import * as fs from 'fs';
+
 import { Cliente } from '../models/Cliente.model';
 import { Conta } from '../models/Conta.model';
+import { ClientesRepository } from './repository/clientes.repository';
 @Injectable()
 export class ClientesService {
-  private readonly filePath = path.resolve('src/clientes/clientes.json');
-
-  private readClientes(): Cliente[] {
-    const data = fs.readFileSync(this.filePath, 'utf8');
-    return JSON.parse(data) as Cliente[];
-  }
-
-  private writeClientes(clientes: Cliente[]): void {
-    fs.writeFileSync(this.filePath, JSON.stringify(clientes, null, 2), 'utf8');
-  }
+  constructor(private readonly clientesRepository: ClientesRepository) {}
 
   criarClienteNovo(criaClienteDto): Cliente {
     const { nomeCompleto, endereco, telefone, email, dataDeNascimento, cpf } =
@@ -38,15 +29,15 @@ export class ClientesService {
       cpf,
     );
 
-    const listaDeClientes = this.readClientes();
+    const listaDeClientes = this.clientesRepository.readClientes();
     listaDeClientes.push(clienteNovo);
-    this.writeClientes(listaDeClientes);
+    this.clientesRepository.writeClientes(listaDeClientes);
 
     return clienteNovo;
   }
 
   buscarTodosOsClientes() {
-    const listaDeClientes = this.readClientes();
+    const listaDeClientes = this.clientesRepository.readClientes();
     return listaDeClientes;
   }
 
@@ -62,12 +53,12 @@ export class ClientesService {
   }
 
   removerCliente(idCliente: number): Cliente[] {
-    const listaDeClientes = this.readClientes();
+    const listaDeClientes = this.clientesRepository.readClientes();
     const listaAtualizada = listaDeClientes.filter(
       (clientes) => clientes.id !== idCliente,
     );
 
-    this.writeClientes(listaAtualizada);
+    this.clientesRepository.writeClientes(listaAtualizada);
     return listaAtualizada;
   }
 
@@ -94,7 +85,7 @@ export class ClientesService {
   }
 
   private buscarPorCPF(cpf): Cliente {
-    const listaDeClientes = this.readClientes();
+    const listaDeClientes = this.clientesRepository.readClientes();
 
     const cliente = listaDeClientes.find((cliente) => cliente.cpf === cpf);
 
@@ -102,7 +93,7 @@ export class ClientesService {
   }
 
   private buscarPorIdInterno(id: number): Cliente {
-    const listaDeClientes = this.readClientes();
+    const listaDeClientes = this.clientesRepository.readClientes();
 
     const cliente = listaDeClientes.find((cliente) => cliente.id === id);
 
@@ -110,7 +101,7 @@ export class ClientesService {
   }
 
   private atualizarCliente(cliente: Cliente): void {
-    const listaDeClientes = this.readClientes();
+    const listaDeClientes = this.clientesRepository.readClientes();
     const index = listaDeClientes.findIndex((c) => c.id === cliente.id);
 
     if (index === -1) {
@@ -118,6 +109,6 @@ export class ClientesService {
     }
 
     listaDeClientes[index] = cliente;
-    this.writeClientes(listaDeClientes);
+    this.clientesRepository.writeClientes(listaDeClientes);
   }
 }

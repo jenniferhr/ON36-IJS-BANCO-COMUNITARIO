@@ -3,6 +3,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsUUID,
   Min,
   ValidateIf,
 } from 'class-validator';
@@ -14,8 +15,8 @@ export class CreateContaDto {
   idCliente: number;
 
   @IsNotEmpty()
-  @IsNumber()
-  idGerente: number;
+  @IsUUID()
+  idGerente: string;
 
   @IsNotEmpty()
   @IsNumber()
