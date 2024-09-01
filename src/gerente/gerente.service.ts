@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs';
 import { Gerente } from '../models/Gerente.model';
+import { Cliente } from 'src/models/Cliente.model';
 
 @Injectable()
 export class GerenteService {
@@ -35,7 +36,12 @@ export class GerenteService {
     return gerente as Gerente;
   }
 
-  atualizarGerente(gerenteAtualizado: Gerente): void {
+  adicionarClienteAoGerente(gerente: Gerente, cliente: Cliente) {
+    gerente.clientes.push(cliente);
+    this.atualizarGerente(gerente);
+  }
+
+  private atualizarGerente(gerenteAtualizado: Gerente): void {
     const listaDeGerentes = this.readGerentes();
     const index = listaDeGerentes.findIndex(
       (gerente) => gerente.id === gerenteAtualizado.id,

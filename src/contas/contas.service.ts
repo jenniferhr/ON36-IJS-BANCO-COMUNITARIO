@@ -59,6 +59,7 @@ export class ContasService {
     }
 
     this.clientesService.adicionarContaACliente(contaNova);
+    this.gerenteService.adicionarClienteAoGerente(gerente, clienteSemContas);
 
     const listaDeContas = this.readContas();
     listaDeContas.push(contaNova);
