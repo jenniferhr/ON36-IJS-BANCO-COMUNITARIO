@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Gerente } from 'src/models/Gerente.model';
+import { Gerente } from '../models/Gerente.model';
 
 @Injectable()
 export class GerenteService {

@@ -5,8 +5,8 @@ import {
 } from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Cliente } from 'src/models/Cliente.model';
-import { Conta } from 'src/models/Conta.model';
+import { Cliente } from '../models/Cliente.model';
+import { Conta } from '../models/Conta.model';
 @Injectable()
 export class ClientesService {
   private readonly filePath = path.resolve('src/clientes/clientes.json');

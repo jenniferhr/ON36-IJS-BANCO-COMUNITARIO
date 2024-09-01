@@ -6,7 +6,7 @@ import {
   Min,
   ValidateIf,
 } from 'class-validator';
-import { TipoConta } from 'src/interfaces/IConta';
+import { TipoConta } from '../../interfaces/IConta';
 
 export class CreateContaDto {
   @IsNotEmpty()

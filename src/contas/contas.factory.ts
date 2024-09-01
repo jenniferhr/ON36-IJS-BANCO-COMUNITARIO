@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { TipoConta } from 'src/interfaces/IConta';
-import { Cliente } from 'src/models/Cliente.model';
-import { Conta } from 'src/models/Conta.model';
-import { ContaCorrente } from 'src/models/ContaCorrente.model';
-import { ContaPoupanca } from 'src/models/ContaPoupanca.model';
-import { Gerente } from 'src/models/Gerente.model';
+import { TipoConta } from '../interfaces/IConta';
+import { Cliente } from '../models/Cliente.model';
+import { Conta } from '../models/Conta.model';
+import { ContaCorrente } from '../models/ContaCorrente.model';
+import { ContaPoupanca } from '../models/ContaPoupanca.model';
+import { Gerente } from '../models/Gerente.model';
 
 @Injectable()
 export class ContasFactory {

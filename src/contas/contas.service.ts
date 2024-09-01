@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { CreateContaDto } from './dto/create-conta.dto';
-import { GerenteService } from 'src/gerente/gerente.service';
+import { GerenteService } from '../gerente/gerente.service';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Conta } from 'src/models/Conta.model';
-import { ClientesService } from 'src/clientes/clientes.service';
+import { Conta } from '../models/Conta.model';
+import { ClientesService } from '../clientes/clientes.service';
 import { ContasFactory } from './contas.factory';
 
 @Injectable()
