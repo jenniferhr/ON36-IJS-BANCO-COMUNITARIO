@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { v4 } from 'uuid';
 import { Cliente } from './Cliente.model';
 
 export class Gerente {
@@ -7,7 +7,7 @@ export class Gerente {
   clientes: Cliente[] = [];
 
   constructor(nomeCompleto: string) {
-    this.id = randomUUID();
+    this.id = v4();
     this.nomeCompleto = nomeCompleto;
     this.clientes = [];
   }
