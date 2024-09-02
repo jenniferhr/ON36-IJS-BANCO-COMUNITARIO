@@ -4,6 +4,7 @@ import { ContasService } from './contas.service';
 import { ContasFactory } from './contas.factory';
 import { GerenteModule } from '../gerente/gerente.module';
 import { ClientesModule } from '../clientes/clientes.module';
+import { ContasRepository } from './repository/contas.repository';
 
 describe('ContasController', () => {
   let controller: ContasController;
@@ -12,7 +13,7 @@ describe('ContasController', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [GerenteModule, ClientesModule],
       controllers: [ContasController],
-      providers: [ContasService, ContasFactory],
+      providers: [ContasService, ContasFactory, ContasRepository],
     }).compile();
 
     controller = module.get<ContasController>(ContasController);
