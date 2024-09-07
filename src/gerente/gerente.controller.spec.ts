@@ -6,11 +6,7 @@ import { Gerente } from 'src/models/Gerente.model';
 
 const nomeGerente = 'Pedro Teste da Silva';
 const idGerente = '3356b815-ab52-41c2-9cb1-38654234c34b';
-const gerenteRetornado = {
-  id: idGerente,
-  nomeCompleto: nomeGerente,
-  clientes: [],
-} as Gerente;
+const gerenteRetornado = {} as Gerente;
 
 describe.only('GerenteController', () => {
   let controller: GerenteController;
@@ -30,7 +26,7 @@ describe.only('GerenteController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should call service.criarGerente', () => {
+  it('deve chamar service.criarGerente', () => {
     const criarMockado = jest
       .spyOn(service, 'criarGerente')
       .mockReturnValue(gerenteRetornado);
@@ -41,7 +37,7 @@ describe.only('GerenteController', () => {
     expect(criarMockado).toHaveBeenCalledTimes(1);
   });
 
-  it('should call service.buscarPorId', () => {
+  it('deve chamar service.buscarPorId', () => {
     const buscarPorIdMockado = jest
       .spyOn(service, 'buscarPorId')
       .mockReturnValue(gerenteRetornado);
