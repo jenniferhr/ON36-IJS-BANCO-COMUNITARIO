@@ -3,6 +3,7 @@ import { GerenteService } from './gerente.service';
 import { GerenteRepository } from './repository/gerente.repository';
 import { Gerente } from '../models/Gerente.model';
 import * as uuid from 'uuid';
+import { NotFoundException } from '@nestjs/common';
 jest.mock('uuid');
 
 const nomeGerente = 'Mario Silva';
@@ -53,7 +54,12 @@ describe('GerenteService', () => {
     expect(response).toEqual(gerenteExistente);
   });
 
-  it.todo(
-    'deve retornar NotFoundException caso não exista gerente com o id passado',
-  );
+  it('deve retornar NotFoundException caso não exista gerente com o id passado', () => {
+    jest.spyOn(repository, 'readGerentes').mockReturnValue([]);
+    expect(() => {
+      service.buscarPorId(idGerente);
+    }).toThrow(NotFoundException);
+  });
+
+  it.todo('deve atualizar a lista de clientes adicionando o cliente');
 });
