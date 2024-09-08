@@ -37,26 +37,28 @@ export class ContasService {
     const clienteSemContas = { ...cliente };
     delete clienteSemContas.contas;
 
-    const contaNova = this.contasFactory.criarConta(
-      tipo,
-      numeroConta,
-      clienteSemContas,
-      gerente,
-      adicionais,
-    );
+    try {
+      const contaNova = this.contasFactory.criarConta(
+        tipo,
+        numeroConta,
+        clienteSemContas,
+        gerente,
+        adicionais,
+      );
 
-    if (!contaNova) {
-      throw new InternalServerErrorException('A conta não pôde ser criada.');
+      this.clientesService.adicionarContaACliente(contaNova);
+      this.gerenteService.adicionarClienteAoGerente(gerente, clienteSemContas);
+
+      const listaDeContas = this.contasRepository.readContas();
+      listaDeContas.push(contaNova);
+      this.contasRepository.writeContas(listaDeContas);
+
+      return contaNova;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `Erro ao criar conta: ${error.message}`,
+      );
     }
-
-    this.clientesService.adicionarContaACliente(contaNova);
-    this.gerenteService.adicionarClienteAoGerente(gerente, clienteSemContas);
-
-    const listaDeContas = this.contasRepository.readContas();
-    listaDeContas.push(contaNova);
-    this.contasRepository.writeContas(listaDeContas);
-
-    return contaNova;
   }
 
   buscarTodasAsContas() {

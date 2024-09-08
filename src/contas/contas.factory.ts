@@ -33,7 +33,7 @@ export class ContasFactory {
           atributos.taxaJuros,
         );
       default:
-        return null;
+        throw new Error('Tipo de conta inválido.');
     }
   }
 }
