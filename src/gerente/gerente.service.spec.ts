@@ -54,7 +54,7 @@ describe('GerenteService', () => {
     expect(response).toEqual(gerenteExistente);
   });
 
-  it('deve retornar NotFoundException caso não exista gerente com o id passado', () => {
+  it('deve fazer throw de NotFoundException caso não exista gerente com o id passado', () => {
     jest.spyOn(repository, 'readGerentes').mockReturnValue([]);
     expect(() => {
       service.buscarPorId(idGerente);
