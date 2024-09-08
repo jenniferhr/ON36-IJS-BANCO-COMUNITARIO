@@ -22,6 +22,10 @@ describe('GerenteService', () => {
     repository = module.get<GerenteRepository>(GerenteRepository);
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });

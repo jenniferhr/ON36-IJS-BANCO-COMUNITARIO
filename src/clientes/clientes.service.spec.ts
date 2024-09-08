@@ -47,6 +47,10 @@ describe('ClientesService', () => {
     repository = module.get<ClientesRepository>(ClientesRepository);
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
@@ -71,10 +75,10 @@ describe('ClientesService', () => {
       .spyOn(ClientesService.prototype as any, 'buscarPorCPF')
       .mockReturnValue(clienteSimulado);
 
-    expect(buscarPorCPFSpy).toHaveBeenCalledTimes(1);
     expect(() => {
       service.criarClienteNovo(criaClienteObjeto);
     }).toThrow(ConflictException);
+    expect(buscarPorCPFSpy).toHaveBeenCalledTimes(1);
   });
 
   it('deve retornar todos os clientes salvos', () => {
@@ -101,10 +105,10 @@ describe('ClientesService', () => {
       .spyOn(ClientesService.prototype as any, 'buscarPorIdInterno')
       .mockReturnValue(null);
 
-    expect(buscarPorIdSpy).toHaveBeenCalledTimes(1);
     expect(() => {
       service.buscarClientePorId(idCliente);
     }).toThrow(NotFoundException);
+    expect(buscarPorIdSpy).toHaveBeenCalledTimes(1);
   });
 
   it('deve remover um cliente', () => {
