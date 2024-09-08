@@ -1,7 +1,7 @@
 import { Conta } from '../models/Conta.model';
 
 export interface ICliente {
-  id: number;
+  id: string;
   nomeCompleto: string;
   endereco: string;
   telefone: string;

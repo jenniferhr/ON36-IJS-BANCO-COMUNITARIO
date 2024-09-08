@@ -41,7 +41,7 @@ export class ClientesService {
     return listaDeClientes;
   }
 
-  buscarClientePorId(id: number): Cliente {
+  buscarClientePorId(id: string): Cliente {
     const clienteExistente = this.buscarPorIdInterno(id);
     if (!clienteExistente) {
       throw new NotFoundException(
@@ -52,7 +52,7 @@ export class ClientesService {
     return clienteExistente;
   }
 
-  removerCliente(idCliente: number): Cliente[] {
+  removerCliente(idCliente: string): Cliente[] {
     const listaDeClientes = this.clientesRepository.readClientes();
     const listaAtualizada = listaDeClientes.filter(
       (clientes) => clientes.id !== idCliente,
@@ -92,7 +92,7 @@ export class ClientesService {
     return cliente || null;
   }
 
-  private buscarPorIdInterno(id: number): Cliente {
+  private buscarPorIdInterno(id: string): Cliente {
     const listaDeClientes = this.clientesRepository.readClientes();
 
     const cliente = listaDeClientes.find((cliente) => cliente.id === id);

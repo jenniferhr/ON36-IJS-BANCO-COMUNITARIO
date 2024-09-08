@@ -12,7 +12,7 @@ import { TipoConta } from '../../interfaces/IConta';
 export class CreateContaDto {
   @IsNotEmpty()
   @IsNumber()
-  idCliente: number;
+  idCliente: string;
 
   @IsNotEmpty()
   @IsUUID()

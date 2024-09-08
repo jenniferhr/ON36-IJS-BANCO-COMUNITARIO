@@ -26,7 +26,7 @@ describe('GerenteService', () => {
     expect(service).toBeDefined();
   });
 
-  it.only('deve criar gerente', () => {
+  it('deve criar gerente', () => {
     const params = { nomeCompleto: nomeGerente };
     jest.spyOn(repository, 'readGerentes').mockReturnValue([]);
     jest.spyOn(repository, 'writeGerentes').mockReturnValue();
