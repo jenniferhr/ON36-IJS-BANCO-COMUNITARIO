@@ -26,12 +26,12 @@ export class ContasService {
 
     const gerente = this.gerenteService.buscarPorId(idGerente);
     if (!gerente) {
-      throw new Error('Gerente não encontrado');
+      throw new NotFoundException('Gerente não encontrado');
     }
 
     const cliente = this.clientesService.buscarClientePorId(idCliente);
     if (!cliente) {
-      throw new Error('Cliente não encontrado');
+      throw new NotFoundException('Cliente não encontrado');
     }
 
     const clienteSemContas = { ...cliente };
