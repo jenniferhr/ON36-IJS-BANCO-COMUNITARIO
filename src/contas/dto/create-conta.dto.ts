@@ -3,19 +3,20 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsUUID,
   Min,
   ValidateIf,
 } from 'class-validator';
-import { TipoConta } from 'src/interfaces/IConta';
+import { TipoConta } from '../../interfaces/IConta';
 
 export class CreateContaDto {
   @IsNotEmpty()
-  @IsNumber()
-  idCliente: number;
+  @IsUUID()
+  idCliente: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  idGerente: number;
+  @IsUUID()
+  idGerente: string;
 
   @IsNotEmpty()
   @IsNumber()

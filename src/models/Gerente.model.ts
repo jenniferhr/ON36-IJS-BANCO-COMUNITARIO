@@ -1,14 +1,13 @@
+import { v4 } from 'uuid';
 import { Cliente } from './Cliente.model';
 
 export class Gerente {
-  private static nextId: number = 1;
-
-  id: number;
+  id: string;
   nomeCompleto: string;
   clientes: Cliente[] = [];
 
   constructor(nomeCompleto: string) {
-    this.id = Gerente.nextId++;
+    this.id = v4();
     this.nomeCompleto = nomeCompleto;
     this.clientes = [];
   }

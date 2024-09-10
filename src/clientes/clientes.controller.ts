@@ -18,11 +18,11 @@ export class ClientesController {
 
   @Get(':id')
   buscarUm(@Param('id') id: string) {
-    return this.clientesService.buscarClientePorId(+id);
+    return this.clientesService.buscarClientePorId(id);
   }
 
   @Delete(':id')
   removeUm(@Param('id') id: string) {
-    return this.clientesService.removerCliente(+id);
+    return this.clientesService.removerCliente(id);
   }
 }

@@ -1,9 +1,9 @@
 import { ICliente } from '../interfaces/ICliente';
 import { Conta } from './Conta.model';
+import { v4 } from 'uuid';
 
 export class Cliente implements ICliente {
-  private static nextId: number = 1;
-  id: number;
+  id: string;
   nomeCompleto: string;
   endereco: string;
   telefone: string;
@@ -20,7 +20,7 @@ export class Cliente implements ICliente {
     dataDeNascimento: string,
     cpf: string,
   ) {
-    this.id = Cliente.nextId++;
+    this.id = v4();
     this.nomeCompleto = nomeCompleto;
     this.endereco = endereco;
     this.telefone = telefone;

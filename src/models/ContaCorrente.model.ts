@@ -1,4 +1,4 @@
-import { TipoConta } from 'src/interfaces/IConta';
+import { TipoConta } from './../interfaces/IConta';
 import { Cliente } from './Cliente.model';
 import { Conta } from './Conta.model';
 import { Gerente } from './Gerente.model';
