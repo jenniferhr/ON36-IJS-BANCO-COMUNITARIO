@@ -12,7 +12,7 @@ describe('GerenteService (integração)', () => {
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule], // Importe o módulo principal ou os módulos relevantes
+      imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -42,8 +42,8 @@ describe('GerenteService (integração)', () => {
     const idGerente = gerenteCriado.body.id;
 
     return request(app.getHttpServer())
-      .get(`/gerente/${idGerente}`) // Endpoint com o ID do gerente
-      .expect(200) // Espera um status de sucesso
+      .get(`/gerente/${idGerente}`)
+      .expect(200)
       .then((response) => {
         expect(response.body).toMatchObject({
           id: idGerente,
