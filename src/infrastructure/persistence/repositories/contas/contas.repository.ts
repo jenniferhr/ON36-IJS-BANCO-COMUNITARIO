@@ -1,9 +1,11 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { Conta } from 'src/models/Conta.model';
+import { Conta } from '../../../../domain/entities/conta';
 
 export class ContasRepository {
-  private readonly filePath = path.resolve('src/contas/data/contas.json');
+  private readonly filePath = path.resolve(
+    'src/infrastructure/persistence/data/contas.json',
+  );
 
   readContas(): Conta[] {
     const data = fs.readFileSync(this.filePath, 'utf8');

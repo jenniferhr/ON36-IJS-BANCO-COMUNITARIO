@@ -1,8 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Gerente } from '../models/Gerente.model';
-import { Cliente } from 'src/models/Cliente.model';
-import { GerenteRepository } from './repository/gerente.repository';
-
+import { Cliente } from '../../../domain/entities/cliente';
+import { Gerente } from '../../../domain/entities/gerente';
+import { GerenteRepository } from '../../../infrastructure/persistence/repositories/gerente/gerente.repository';
 @Injectable()
 export class GerenteService {
   constructor(private readonly gerenteRepository: GerenteRepository) {}

@@ -1,9 +1,11 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { Gerente } from 'src/models/Gerente.model';
+import { Gerente } from '../../../../domain/entities/gerente';
 
 export class GerenteRepository {
-  private readonly filePath = path.resolve('src/gerente/data/gerentes.json');
+  private readonly filePath = path.resolve(
+    'src/infrastructure/persistence/data/gerentes.json',
+  );
 
   readGerentes(): Gerente[] {
     const data = fs.readFileSync(this.filePath, 'utf8');

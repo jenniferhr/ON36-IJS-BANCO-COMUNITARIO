@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ContasFactory } from './contas.factory';
-import { Cliente } from '../models/Cliente.model';
-import { Gerente } from '../models/Gerente.model';
-import { TipoConta } from '../interfaces/IConta';
-import { ContaCorrente } from '../models/ContaCorrente.model';
-import { ContaPoupanca } from '../models/ContaPoupanca.model';
+import { Cliente } from '../../../domain/entities/cliente';
+import { ContaCorrente } from '../../../domain/entities/conta-corrente';
+import { ContaPoupanca } from '../../../domain/entities/conta-poupanca';
+import { Gerente } from '../../../domain/entities/gerente';
+import { TipoConta } from '../../../domain/interfaces/IConta';
 
 const nomeCliente = 'Maria Silva';
 const enderecoCliente = 'Rua das Flores, 42, Pedrinhas - São Paulo, SP';

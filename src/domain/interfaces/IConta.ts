@@ -1,4 +1,4 @@
-import { Cliente } from '../models/Cliente.model';
+import { Cliente } from '../entities/cliente';
 
 export enum TipoConta {
   Corrente = 'Corrente',

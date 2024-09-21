@@ -1,4 +1,4 @@
-import { Conta } from '../models/Conta.model';
+import { Conta } from '../entities/conta';
 
 export interface ICliente {
   id: string;
