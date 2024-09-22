@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GerenteController } from './gerente.controller';
-import { GerenteService } from './gerente.service';
-import { GerenteRepository } from './repository/gerente.repository';
-import { Gerente } from 'src/models/Gerente.model';
+import { Gerente } from '../../../../domain/entities/gerente';
+import { GerenteService } from '../../../../application/services/gerente/gerente.service';
+import { GerenteRepository } from '../../../../infrastructure/persistence/repositories/gerente/gerente.repository';
 
 const nomeGerente = 'Pedro Teste da Silva';
 const idGerente = '3356b815-ab52-41c2-9cb1-38654234c34b';

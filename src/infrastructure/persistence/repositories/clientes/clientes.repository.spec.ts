@@ -1,6 +1,6 @@
 import * as fs from 'fs';
-import { Cliente } from 'src/models/Cliente.model';
 import { ClientesRepository } from './clientes.repository';
+import { Cliente } from '../../../../domain/entities/cliente';
 jest.mock('fs');
 
 const mockClientes: Cliente[] = [{} as Cliente];

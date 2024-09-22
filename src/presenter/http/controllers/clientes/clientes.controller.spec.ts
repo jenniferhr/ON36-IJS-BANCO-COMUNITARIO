@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ClientesController } from './clientes.controller';
-import { ClientesService } from './clientes.service';
-import { ClientesRepository } from './repository/clientes.repository';
-import { Cliente } from 'src/models/Cliente.model';
-import { CriaClienteDto } from './dto/cria-cliente.dto';
+import { CriaClienteDto } from '../../dto/cria-cliente.dto';
+import { Cliente } from '../../../../domain/entities/cliente';
+import { ClientesService } from '../../../../application/services/clientes/clientes.service';
+import { ClientesRepository } from '../../../../infrastructure/persistence/repositories/clientes/clientes.repository';
 
 const id = '1';
 const criaCliente = {} as CriaClienteDto;

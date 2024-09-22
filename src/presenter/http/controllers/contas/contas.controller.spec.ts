@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ContasController } from './contas.controller';
-import { ContasService } from './contas.service';
-import { ContasFactory } from './contas.factory';
-import { GerenteModule } from '../gerente/gerente.module';
-import { ClientesModule } from '../clientes/clientes.module';
-import { ContasRepository } from './repository/contas.repository';
-import { CreateContaDto } from './dto/create-conta.dto';
-import { Conta } from '../models/Conta.model';
+import { Conta } from '../../../../domain/entities/conta';
+import { CreateContaDto } from '../../dto/create-conta.dto';
+import { ContasService } from '../../../../application/services/contas/contas.service';
+import { GerenteModule } from '../../../../infrastructure/modules/gerente.module';
+import { ClientesModule } from '../../../../infrastructure/modules/clientes.module';
+import { ContasFactory } from '../../../../domain/factories/contas/contas.factory';
+import { ContasRepository } from '../../../../infrastructure/persistence/repositories/contas/contas.repository';
 
 const numeroConta = '1234';
 const criaConta = {} as CreateContaDto;

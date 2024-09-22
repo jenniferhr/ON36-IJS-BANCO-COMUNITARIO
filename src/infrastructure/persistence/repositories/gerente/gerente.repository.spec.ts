@@ -1,6 +1,6 @@
-import { Gerente } from '../../models/Gerente.model';
+import { Gerente } from '../../../../domain/entities/gerente';
 import { GerenteRepository } from './gerente.repository';
-import { Cliente } from '../../models/Cliente.model';
+import { Cliente } from '../../../../domain/entities/cliente';
 
 import * as fs from 'fs';
 jest.mock('fs');

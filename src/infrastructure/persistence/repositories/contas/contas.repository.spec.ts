@@ -1,7 +1,7 @@
+import { Conta } from '../../../../domain/entities/conta';
 import { ContasRepository } from './contas.repository';
 
 import * as fs from 'fs';
-import { Conta } from 'src/models/Conta.model';
 jest.mock('fs');
 
 const mockContas: Conta[] = [{} as Conta];
