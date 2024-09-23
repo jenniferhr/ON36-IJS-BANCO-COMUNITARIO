@@ -1,0 +1,22 @@
+[
+  {
+    "clientes": [
+      {
+        "id": "cd2a1bef-a199-4c87-9067-2f80bb77f2bd",
+        "nomeCompleto": "maria da Silva Almeida",
+        "endereco": "Rua das Flores, 42, Pedrinhas - São Paulo, SP",
+        "telefone": "11982379465",
+        "email": "julia.almeida@gmail.com",
+        "dataDeNascimento": "1998-07-24T00:00:00.000Z",
+        "cpf": "098.765.432-12"
+      }
+    ],
+    "id": "808e38b2-2aa7-417f-b606-ddcc6a21f97d",
+    "nomeCompleto": "Pedro Santos"
+  },
+  {
+    "clientes": [],
+    "id": "e376ef8a-7dbb-4b83-b0ac-0bea597f7e7f",
+    "nomeCompleto": "Pedro Santos"
+  }
+]

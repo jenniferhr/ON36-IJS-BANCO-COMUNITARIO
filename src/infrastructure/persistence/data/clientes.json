@@ -1,0 +1,31 @@
+[
+  {
+    "id": "cd2a1bef-a199-4c87-9067-2f80bb77f2bd",
+    "nomeCompleto": "maria da Silva Almeida",
+    "endereco": "Rua das Flores, 42, Pedrinhas - São Paulo, SP",
+    "telefone": "11982379465",
+    "email": "julia.almeida@gmail.com",
+    "dataDeNascimento": "1998-07-24T00:00:00.000Z",
+    "cpf": "098.765.432-12",
+    "contas": [
+      {
+        "numeroDaConta": 987,
+        "saldo": 0,
+        "tipo": "Corrente",
+        "gerente": "Pedro Santos",
+        "ativa": true,
+        "limiteChequeEspecial": 0
+      }
+    ]
+  },
+  {
+    "id": "fb17c6c1-5057-4f0a-b971-80e9edba4b11",
+    "nomeCompleto": "maria da Silva Almeida",
+    "endereco": "Avenida Marechal Dutra, Centro. CEP: 78700-110. Rondonópolis - MT.",
+    "telefone": "11982379465",
+    "email": "maria.almeida@gmail.com",
+    "dataDeNascimento": "1998-07-24T00:00:00.000Z",
+    "cpf": "029.616.520-49",
+    "contas": []
+  }
+]
