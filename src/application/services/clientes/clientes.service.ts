@@ -6,19 +6,25 @@ import {
 import { Cliente } from '../../../domain/entities/cliente';
 import { Conta } from '../../../domain/entities/conta';
 import { ClientesRepository } from '../../../infrastructure/persistence/repositories/clientes/clientes.repository';
+import { CepService } from '../../../infrastructure/adapters/cep-adapter.service';
 
 @Injectable()
 export class ClientesService {
-  constructor(private readonly clientesRepository: ClientesRepository) {}
+  constructor(
+    private readonly clientesRepository: ClientesRepository,
+    private readonly cepService: CepService,
+  ) {}
 
-  criarClienteNovo(criaClienteDto): Cliente {
-    const { nomeCompleto, endereco, telefone, email, dataDeNascimento, cpf } =
+  async criarClienteNovo(criaClienteDto): Promise<Cliente> {
+    const { nomeCompleto, cep, telefone, email, dataDeNascimento, cpf } =
       criaClienteDto;
 
     const clienteExistente = this.buscarPorCPF(cpf);
     if (clienteExistente) {
       throw new ConflictException('Um cliente com esse CPF já existe.');
     }
+
+    const endereco = await this.cepService.consultaCep(cep);
 
     const clienteNovo = new Cliente(
       nomeCompleto,

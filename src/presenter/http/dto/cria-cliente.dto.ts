@@ -14,7 +14,7 @@ export class CriaClienteDto {
   nomeCompleto: string;
 
   @IsString()
-  endereco: string;
+  cep: string;
 
   @IsString()
   telefone: string;
