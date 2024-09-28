@@ -24,23 +24,3 @@ export class CepService implements ICepService {
     }
   }
 }
-
-/* 
-{
-"cep": "44050-422",
-"logradouro": "Rua Rio Grande do Norte",
-"complemento": "",
-"unidade": "",
-"bairro": "Queimadinha",
-"localidade": "Feira de Santana",
-"uf": "BA",
-"estado": "Bahia",
-"regiao": "Nordeste",
-"ibge": "2910800",
-"gia": "",
-"ddd": "75",
-"siafi": "3515"
-}
-
-Endereço: ${response.data.logradouro}, ${response.data.complemento}, ${response.data.bairro}, ${response.data.localidade}, ${response.data.uf}
-*/
