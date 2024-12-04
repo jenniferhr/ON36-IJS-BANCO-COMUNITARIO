@@ -2,17 +2,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
-import { CriaClienteDto } from '../src/clientes/dto/cria-cliente.dto';
+import { CriaClienteDto } from 'src/presenter/http/dto/cria-cliente.dto';
 
 const nomeCompleto = 'Julia das Integrações';
-const endereco = 'Rua das Flores, 42, Pedrinhas - São Paulo, SP';
+const cep = '78700-110';
 const telefone = '11982379465';
 const email = 'julia.almeida@gmail.com';
 const dataDeNascimento = '1998-07-24';
 const cpf = '098.765.432-12';
 const criaClienteObjeto = {
   nomeCompleto,
-  endereco,
+  cep,
   telefone,
   email,
   dataDeNascimento,
@@ -48,7 +48,6 @@ describe('ClientesService (integração)', () => {
       .expect((res) => {
         expect(res.body).toMatchObject({
           nomeCompleto,
-          endereco,
           telefone,
           email,
           dataDeNascimento,
